@@ -5,20 +5,23 @@ const BoxForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.onNewBox(box);
+        const newBox = {color: box}
+        props.addNewBox(newBox);
+        setBox("");
     };
 
     return(
-        <div class="row justify-content-center">
         <form onSubmit= {handleSubmit}>
-            <div>
-                <label htmlFor="box">Color </label> 
-                <input onChange={ (e) => setBox(e.target.value) } type="text" />
-                <input type="submit" value="Add" />
+            <div className="form-group">
+                <label>Color</label> 
+                <input 
+                type="text" 
+                onChange={ (e) => setBox(e.target.value) } 
+                />
             </div>
+                <input type="submit" value="Add" className="btn btn-outline-info" />
         </form>
 
-        </div>
     );
 
 };

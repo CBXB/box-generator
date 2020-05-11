@@ -6,21 +6,35 @@ import BoxForm from './components/BoxForm';
 import Display from './components/BoxDisplay';
 
 function App() {
-  const [currentBox, setCurrentBox] = useState("");
+  const [currentBox, setCurrentBox] = useState([]);
   
     const gottaBox = ( newBox ) => {
-        setCurrentBox( newBox );
+        setCurrentBox( [...currentBox, newBox] );
     }
 
   return (
-    
+    <div className="container">
+      <div className="jumbotron">
+        <h1>Boxes</h1>
+      </div>
+      <div className="row">
+        <div className="col-4">
+            <BoxForm addNewBox={ gottaBox } />
 
-    <>
-        <BoxForm onNewBox={ gottaBox } />
-        <Display bgColor="red" />
-        <Display bgColor="blue" />
-        <Display bgColor={currentBox} />
-      </>
+        </div>
+        <>
+            <Display bgColor="red" />
+            <Display bgColor="blue" />
+            {currentBox.map((box,i) => 
+              <Display key={i} bgColor={box.color}/>
+
+            )}
+          </>
+
+      </div>
+
+    </div>
+
   );
 }
 
